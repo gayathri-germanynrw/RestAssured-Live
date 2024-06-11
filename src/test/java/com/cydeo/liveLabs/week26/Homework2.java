@@ -1,4 +1,4 @@
-package com.cydeo.liveLabs.week1;
+package com.cydeo.liveLabs.week26;
 
 import com.cydeo.utility.HrTestBase;
 
