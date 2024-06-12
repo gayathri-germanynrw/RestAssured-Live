@@ -1,6 +1,4 @@
-package com.cydeo.liveLabs.week26;
-
-import com.cydeo.utility.HrTestBase;
+package com.cydeo.liveLabs.week26.morning;
 
 public class Homework2  {
     /*

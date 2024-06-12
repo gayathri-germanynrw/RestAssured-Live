@@ -2,7 +2,7 @@ package com.cydeo.liveLabs.week26;
 
 import com.cydeo.utility.HrTestBase;
 
-public class Homework1 extends HrTestBase {
+public class Homework1  {
 
     /*
 
