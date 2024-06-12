@@ -18,6 +18,10 @@ public class Homework1  extends HrTestBase {
      * - Then status code is 200
      * - And Content - Type is application/json
      * - And response contains United States of America
+     *
+     *   Given --> Always condition that you have
+     *   When  --> Action
+     *   Then  --> Verification
 
      */
 
@@ -74,18 +78,10 @@ public class Homework1  extends HrTestBase {
     }
 
 
-
-
-
-
-
-
-
-
     /**
      * Task 3 :
      * - Given Accept type  is Json
-     * - When users sends request to /regions/1
+     * - When users sends GET request to /regions/1
      * - Then status code is 200
      * - And Content - Type is application/json
      * - And response contains Europe
@@ -93,4 +89,35 @@ public class Homework1  extends HrTestBase {
      * - And "Transfer-Encoding" should be "chunked"
      */
 
+    @Test
+    public void task3() {
+
+        Response response = RestAssured.given().accept(ContentType.JSON)
+                .pathParam("id", 1)
+                .when().get("regions/{id}");
+
+
+        //     * - Then status code is 200
+        Assertions.assertEquals(200,response.statusCode());
+
+        //     * - And Content - Type is application/json
+        Assertions.assertEquals(ContentType.JSON.toString(),response.contentType());
+
+
+        //     * - And response contains Europe
+        //     Init JSONPATH Object
+        JsonPath jp = response.jsonPath();
+        String regionName = jp.getString("region_name");
+        Assertions.assertEquals("Europe",regionName);
+
+
+        //     * - And header should contains Date
+        Assertions.assertTrue(response.headers().hasHeaderWithName("Date"));
+
+        //     * - And "Transfer-Encoding" should be "chunked"
+        String header = response.header("Transfer-Encoding");
+        Assertions.assertEquals("chunked",header);
+
+
+    }
 }
