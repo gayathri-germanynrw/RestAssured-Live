@@ -2,12 +2,15 @@ package com.cydeo.liveLabs.week26.morning;
 
 import io.restassured.RestAssured;
 import io.restassured.http.ContentType;
+import io.restassured.path.json.JsonPath;
 import io.restassured.response.Response;
 import org.apache.http.HttpStatus;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-import static io.restassured.RestAssured.given;
+import static io.restassured.RestAssured.*;
+import static org.junit.jupiter.api.Assertions.*;
+
 
 public class Homework1  {
 
@@ -25,23 +28,23 @@ public class Homework1  {
         //opt1
         int statusCode = response.getStatusCode();
         System.out.println("response.getStatusCode() = " + response.getStatusCode());
-        Assertions.assertEquals(200,statusCode);
+        assertEquals(200,statusCode);
 
         //opt2
-        Assertions.assertEquals(200,response.getStatusCode());
+        assertEquals(200,response.getStatusCode());
 
         //opt3
-        Assertions.assertEquals(HttpStatus.SC_OK, response.getStatusCode());
+        assertEquals(HttpStatus.SC_OK, response.getStatusCode());
 
 //* - And Content - Type is application/json
 
         //opt1
         String contentType = response.contentType();
         System.out.println("contentType = " + contentType);
-        Assertions.assertEquals("application/json",contentType);
+        assertEquals("application/json",contentType);
 
         //opt2
-        Assertions.assertEquals(ContentType.JSON.toString(), response.contentType());
+        assertEquals(ContentType.JSON.toString(), response.contentType());
 
 //* - And response contains United States of America
 
@@ -57,50 +60,58 @@ public class Homework1  {
 
     }
 
-    /*
-     * Task 2 : NEGATIVE TESTS
-     * - Given accept type is Json
-     * - When users sends request to /employees/1
-     * - Then status code is 404
-     */
     @Test
     public void task2() {
+//     * - Given accept type is Json
+//     * - When users sends request to /employees/1
         Response response = given().accept(ContentType.JSON)
                 .when().get(url+"employees/1");
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+//* - Then status code is 404
+        System.out.println("response.getStatusCode() = " + response.getStatusCode());
+        assertEquals(404,response.getStatusCode());
+        assertEquals(HttpStatus.SC_NOT_FOUND, response.getStatusCode());
     }
 
     /*
-     * Task 3 :
-     * - Given Accept type  is Json
-     * - When users sends request to /regions/1
-     * - Then status code is 200
-     * - And Content - Type is application/json
-     * - And response contains Europe
-     * - And header should contains Date
      * - And "Transfer-Encoding" should be "chunked"
-
-
      */
 
+    @Test
+    public void task3() {
+        int region_id=1;
+//* - Given Accept type  is Json
+//* - When users sends request to /regions/1
+        //opt1
+        //Response response = given().accept(ContentType.JSON).when().get(url + "regions/1");
+        //opt2
+        Response response = given().accept(ContentType.JSON).when().get(url + "regions/"+region_id);
+
+
+//* - Then status code is 200
+        System.out.println("response.statusCode() = " + response.statusCode());
+        assertEquals(200,response.statusCode());
+
+//* - And Content - Type is application/json
+        System.out.println("response.contentType() = " + response.contentType());
+        assertEquals(ContentType.JSON.toString(), response.contentType());
+
+// * - And response contains Europe
+        JsonPath jsonPath =response.jsonPath();
+        System.out.println("jsonPath.getString(\"region_name\") = " + jsonPath.getString("region_name"));
+        assertEquals("Europe", jsonPath.getString("region_name"));
+
+//* - And header should contains Date
+        System.out.println("response.headers().hasHeaderWithName(\"Date\") = " + response.headers().hasHeaderWithName("Date"));
+        assertTrue(response.headers().hasHeaderWithName("Date"));
+
+//* - And "Transfer-Encoding" should be "chunked"
+        System.out.println("response.header(\"Transfer-Encoding\") = " + response.header("Transfer-Encoding"));
+        assertEquals("chunked", response.header("Transfer-Encoding"));
+
+        System.out.println("======================================================");
+
+        response.prettyPrint();
+
+    }
 }
