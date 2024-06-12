@@ -10,7 +10,7 @@ import org.junit.jupiter.api.Test;
 
 public class Homework1  extends HrTestBase {
 
-    /*
+    /**
 
      * Task 1 :
      * - Given accept type is Json
@@ -18,23 +18,6 @@ public class Homework1  extends HrTestBase {
      * - Then status code is 200
      * - And Content - Type is application/json
      * - And response contains United States of America
-
-
-     * Task 2 : NEGATIVE TESTS
-     * - Given accept type is Json
-     * - When users sends request to /employees/1
-     * - Then status code is 404
-
-
-     * Task 3 :
-     * - Given Accept type  is Json
-     * - When users sends request to /regions/1
-     * - Then status code is 200
-     * - And Content - Type is application/json
-     * - And response contains Europe
-     * - And header should contains Date
-     * - And "Transfer-Encoding" should be "chunked"
-
 
      */
 
@@ -71,5 +54,43 @@ public class Homework1  extends HrTestBase {
 
 
     }
+    /**
+     *
+     * Task 2 : NEGATIVE TESTS
+     * - Given accept type is Json
+     * - When users sends request to /employees/1
+     * - Then status code is 404
+     *
+     */
+    @Test
+    public void task2() {
+
+        Response response = RestAssured.given().accept(ContentType.JSON)
+                .when().get("/employees/1");
+
+        Assertions.assertEquals(404,response.statusCode());
+
+
+    }
+
+
+
+
+
+
+
+
+
+
+    /**
+     * Task 3 :
+     * - Given Accept type  is Json
+     * - When users sends request to /regions/1
+     * - Then status code is 200
+     * - And Content - Type is application/json
+     * - And response contains Europe
+     * - And header should contains Date
+     * - And "Transfer-Encoding" should be "chunked"
+     */
 
 }
