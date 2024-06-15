@@ -4,6 +4,7 @@ import com.cydeo.utility.FakeStoreTestBase;
 import io.restassured.RestAssured;
 import io.restassured.http.ContentType;
 import io.restassured.response.Response;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 public class P01_PathParam extends FakeStoreTestBase {
@@ -30,6 +31,29 @@ public class P01_PathParam extends FakeStoreTestBase {
 
         // Print response
         response.prettyPrint();
+
+        //     * - Status code should be 200
+        Assertions.assertEquals(200,response.statusCode());
+
+        //     * - Content Type is application/json; charset=utf-8
+        Assertions.assertEquals("application/json; charset=utf-8",response.contentType());
+
+        //     * - id is 60
+        Assertions.assertEquals(60,(int)response.path("id"));
+
+        //     * - Title is "My Product"
+        Assertions.assertEquals("My Product",response.path("title"));
+
+        //     * - Category name is "Organic"
+        Assertions.assertEquals("Organic",response.path("category.name"));
+
+
+
+
+
+
+
+
 
     }
 }
