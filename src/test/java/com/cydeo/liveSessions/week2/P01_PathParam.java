@@ -5,8 +5,12 @@ import io.restassured.RestAssured;
 import io.restassured.http.ContentType;
 import io.restassured.path.json.JsonPath;
 import io.restassured.response.Response;
+
+import io.restassured.response.ValidatableResponse;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
+
+import static org.hamcrest.Matchers.*;
 
 public class P01_PathParam extends FakeStoreTestBase {
 
@@ -110,4 +114,65 @@ public class P01_PathParam extends FakeStoreTestBase {
 
 
     }
+
+    @Test
+    public void hamcrest() {
+
+
+        JsonPath jp = RestAssured.given().accept(ContentType.JSON)
+                .pathParam("id", 60)
+                .when().get("/products/{id}").prettyPeek()
+                .then()
+                .statusCode(200)
+                .contentType(ContentType.JSON.withCharset("utf-8"))
+                .body("id", is(60))
+                .body("title", is("My Product"))
+                .body("category.name", is("Organic"))
+                .extract().jsonPath();
+
+        // What if I need to retrieve category.id
+        int categoryID = jp.getInt("category.id");
+        System.out.println("categoryID = " + categoryID);
+
+
+    }
+
+    @Test
+    public void allInOne() {
+        Response response = getResponse("products", 60);
+
+        // JSON PATH OBJECT
+        JsonPath jp = response.jsonPath();
+
+        //     * - id is 60
+        Assertions.assertEquals(60,jp.getInt("id"));
+
+        //     * - Title is "My Product"
+        Assertions.assertEquals("My Product",jp.getString("title"));
+
+        //     * - Category name is "Organic"
+        Assertions.assertEquals("Organic",jp.getString("category.name"));
+
+    }
+
+    // --> /products/{id}
+    // --> /users/{id}
+    // --> /categories/{id}
+
+    public static Response getResponse(String endpoint,int paramValue){
+
+
+     return    RestAssured.given().accept(ContentType.JSON)
+                .pathParam("id", paramValue)
+                .when().get("/"+endpoint+"/{id}").prettyPeek()
+                .then()
+                .statusCode(200)
+                .contentType(ContentType.JSON.withCharset("utf-8"))
+                .extract().response();
+
+    }
+
+
+
+
 }
