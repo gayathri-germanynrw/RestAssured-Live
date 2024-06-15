@@ -49,10 +49,29 @@ public class P01_PathParam extends FakeStoreTestBase {
 
 
 
+        // HOW CAN I MAKE SURE LINK IS WORKING ? CATEGORY.IMAGE
+        String imageURL = response.path("category.image");
+        System.out.println("imageURL = " + imageURL);
+
+        /*
+          Response res= RestAssured.get(imageURL);
+          int statusCode=res.statusCode();
+
+         */
+
+        int statusCode = RestAssured.get(imageURL).statusCode();
+        Assertions.assertEquals(200,statusCode);
 
 
-
-
+        // HOW TO CHECK BROKEN LINKS IN UI ? --> Link is not working
+        // Locate all
+        // a --> getAttribute("href")
+        // img --> getAttribute("src")
+        //
+        // Create a loop --> Send
+        // int statusCode = RestAssured.get(imageURL).statusCode();
+        //    if(statusCode!=200){
+        //    }
 
 
     }
