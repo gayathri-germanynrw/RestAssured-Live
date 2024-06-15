@@ -70,6 +70,23 @@
 
 
  ------------ PARAMETERS ON API ---------------
+ PATH PARAM
+    -> Returns single resource from list of resources
+    -> It is a part of URL
+        -> /v1/products/{id}
+        -> /v1/products/56
+
+    SELECT * FROM PRODUCTS
+    WHERE ID=56;
+
+ QUERY PARAM
+    -> It filters data based on KEY and VALUE PAIR
+    -> KEY/VALUE should be defined in DOC
+    -> It is not PART of Url
+    -> Query Params starts after ? as KEY and VALUE
+    -> limit and offset is the key
+    -> -> /v1/products?offset=0&limit=50
+
 
 
 
