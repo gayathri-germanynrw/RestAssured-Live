@@ -164,7 +164,7 @@ public class P01_PathParam extends FakeStoreTestBase {
 
      return    RestAssured.given().accept(ContentType.JSON)
                 .pathParam("id", paramValue)
-                .when().get("/"+endpoint+"/{id}").prettyPeek()
+                .when().get("/"+endpoint+"/{id}")
                 .then()
                 .statusCode(200)
                 .contentType(ContentType.JSON.withCharset("utf-8"))
