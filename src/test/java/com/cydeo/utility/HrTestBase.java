@@ -9,6 +9,7 @@ public abstract class HrTestBase {
     public static void init(){
 
         RestAssured.baseURI="http://3.84.109.78:1000/ords/hr";
+
     }
 
 }

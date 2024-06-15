@@ -1,0 +1,75 @@
+
+
+
+-- Which testing framework u used so far ?
+
+== UI
+    -> TestNG
+    -> DDT -> Data Driven Testing
+        -> @DataProvider
+        -> Short Video
+    -> SoftAssert sa=new SoftAssert();
+    -> XML Runners
+
+    -> Cucumber-Junit
+    -> DDT --> Scenario Outline
+           --> Examples
+
+    -> APACHE POI
+        -> External Library to Retrieve data from Excel Files
+
+    -> How DDT testing is possible ?
+        -> It is possible with test Framework
+
+    NOTE - We can retrieve data from external file even if we are not doing
+           DDT as well
+
+== DB
+    -> Junit5
+    -> Cucumber-Junit4
+
+== API
+    -> Junit5
+        -> SoftAssert --> assertAll()
+        -> @ParameterizedTest--> DDT
+                -> CSVSource
+                -> CSVFile
+                -> MethodSource
+                -> ValueSource
+     -> Cucumber-Junit
+
+-- What are the steps for doing API automation ?
+    1- Requirement
+    2- Read documentation
+        -> baseURL + ENDPOINT
+        -> Parameters
+            -> Path
+            -> Query
+        -> Header
+           REQUEST
+            -> Accept      --> API I need data in provided format
+            -> ContentType --> API I am sending data in json format
+            -> Authorization --> Who we are ?
+            -> apiKey --> Who we are ?
+
+           RESPONSE
+            -> ContentType -->  Client this the type of data that I am giving
+        -> HTTPS METHODS
+          -> GET / POST / PUT / PATCH / DELETE
+          -> OPTIONS / HEAD
+
+        -> Status Code
+
+     3- Manual Testing
+        -> Postman -> Manual Testing
+            NOTE --> POSTMAN not for ONLY MANUAL TESTING
+            -> We will learn automation with postman as well
+
+     4- Automation Testing
+        -> Rest Assured Library
+
+
+ ------------ PARAMETERS ON API ---------------
+
+
+
