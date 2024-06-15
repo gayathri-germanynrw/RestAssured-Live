@@ -75,4 +75,27 @@ public class P01_PathParam extends FakeStoreTestBase {
 
 
     }
+
+
+    @Test
+    public void jsonPath() {
+
+
+        Response response = RestAssured.given().accept(ContentType.JSON)
+                .pathParam("id", 60)
+                .when().get("/products/{id}");
+
+        // Print response
+        response.prettyPrint();
+
+        //     * - Status code should be 200
+        Assertions.assertEquals(200,response.statusCode());
+
+        //     * - Content Type is application/json; charset=utf-8
+        Assertions.assertEquals("application/json; charset=utf-8",response.contentType());
+
+
+
+
+    }
 }
