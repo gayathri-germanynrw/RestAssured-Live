@@ -3,6 +3,7 @@ package com.cydeo.liveSessions.week2;
 import com.cydeo.utility.FakeStoreTestBase;
 import io.restassured.RestAssured;
 import io.restassured.http.ContentType;
+import io.restassured.path.json.JsonPath;
 import io.restassured.response.Response;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -95,6 +96,17 @@ public class P01_PathParam extends FakeStoreTestBase {
         Assertions.assertEquals("application/json; charset=utf-8",response.contentType());
 
 
+        // JSON PATH OBJECT
+        JsonPath jp = response.jsonPath();
+
+        //     * - id is 60
+        Assertions.assertEquals(60,jp.getInt("id"));
+
+        //     * - Title is "My Product"
+        Assertions.assertEquals("My Product",jp.getString("title"));
+
+        //     * - Category name is "Organic"
+        Assertions.assertEquals("Organic",jp.getString("category.name"));
 
 
     }
