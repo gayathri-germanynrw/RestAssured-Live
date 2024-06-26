@@ -6,13 +6,12 @@ import lombok.Data;
 
 @Data
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class Place {
+public class MRDataConstructor {
 
-    @JsonProperty("place name")
-    private String placeName;
-
-    @JsonProperty("post code")
-    private String postCode;
-
+    private String limit;
+    private String total;
+    private String offset;
+    @JsonProperty("ConstructorTable")
+    private ConstructorTable constructorTable;
 
 }

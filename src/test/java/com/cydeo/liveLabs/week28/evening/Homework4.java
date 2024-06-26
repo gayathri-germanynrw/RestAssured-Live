@@ -1,13 +1,13 @@
-package com.cydeo.liveLabs.week28;
+package com.cydeo.liveLabs.week28.evening;
+
 import com.cydeo.pojo.MRDataConstructor;
 import com.cydeo.pojo.MRDataDriver;
 import com.cydeo.utility.FormulaTestBase;
 import io.restassured.path.json.JsonPath;
 import org.junit.jupiter.api.Test;
 
-import static io.restassured.RestAssured.*;
-import static org.hamcrest.Matchers.*;
-import static org.junit.jupiter.api.Assertions.*;
+import static io.restassured.RestAssured.given;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class Homework4 extends FormulaTestBase {
      /*

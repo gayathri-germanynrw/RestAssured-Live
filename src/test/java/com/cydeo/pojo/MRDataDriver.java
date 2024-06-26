@@ -6,13 +6,12 @@ import lombok.Data;
 
 @Data
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class Place {
+public class MRDataDriver {
 
-    @JsonProperty("place name")
-    private String placeName;
+    private String total;
 
-    @JsonProperty("post code")
-    private String postCode;
+    @JsonProperty("DriverTable")
+    private DriverTable driverTable;
 
 
 }
